@@ -31,9 +31,9 @@ highScoreElement.textContent = highScore;
 // 初始化游戏
 function initGame() {
     snake = [
-        {x: 10, y: 10},
-        {x: 9, y: 10},
-        {x: 8, y: 10}
+        {x: 10 * gridSize, y: 10 * gridSize},
+        {x: 9 * gridSize, y: 10 * gridSize},
+        {x: 8 * gridSize, y: 10 * gridSize}
     ];
     dx = gridSize;
     dy = 0;
