@@ -179,3 +179,7 @@ button:disabled {
     background: #da190b;
     box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
 }
+
+.hidden {
+    display: none !important;
+}
