@@ -5,6 +5,7 @@ const scoreElement = document.getElementById('score');
 const highScoreElement = document.getElementById('highScore');
 const finalScoreElement = document.getElementById('finalScore');
 const gameOverDiv = document.getElementById('gameOver');
+const leaderboardList = document.getElementById('leaderboardList');
 
 const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
@@ -27,6 +28,58 @@ let isGameRunning = false;
 
 // 初始化
 highScoreElement.textContent = highScore;
+updateLeaderboard();
+
+// 获取积分榜数据
+function getLeaderboard() {
+    const data = localStorage.getItem('snakeLeaderboard');
+    return data ? JSON.parse(data) : [];
+}
+
+// 保存分数到积分榜
+function saveToLeaderboard(finalScore) {
+    if (finalScore === 0) return;
+    
+    const leaderboard = getLeaderboard();
+    const entry = {
+        score: finalScore,
+        date: new Date().toLocaleDateString('zh-CN'),
+        time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    leaderboard.push(entry);
+    
+    // 按分数降序排序，只保留前10
+    leaderboard.sort((a, b) => b.score - a.score);
+    
+    if (leaderboard.length > 10) {
+        leaderboard.length = 10;
+    }
+    
+    localStorage.setItem('snakeLeaderboard', JSON.stringify(leaderboard));
+    updateLeaderboard();
+}
+
+// 更新积分榜显示
+function updateLeaderboard() {
+    const leaderboard = getLeaderboard();
+    
+    if (leaderboard.length === 0) {
+        leaderboardList.innerHTML = '<li>暂无记录</li>';
+        return;
+    }
+    
+    leaderboardList.innerHTML = leaderboard.map((entry, index) => {
+        const medals = ['🥇', '🥈', '🥉'];
+        const medal = index < 3 ? medals[index] : `<span style="color:#888">${index + 1}.</span>`;
+        return `
+            <li>
+                <span>${medal} ${entry.date} ${entry.time}</span>
+                <span class="score">${entry.score} 分</span>
+            </li>
+        `;
+    }).join('');
+}
 
 // 初始化游戏
 function initGame() {
@@ -174,6 +227,10 @@ function gameOver() {
     isGameRunning = false;
     clearInterval(gameLoop);
     finalScoreElement.textContent = score;
+    
+    // 保存到积分榜
+    saveToLeaderboard(score);
+    
     gameOverDiv.classList.remove('hidden');
     pauseBtn.disabled = true;
 }

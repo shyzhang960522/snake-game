@@ -108,8 +108,66 @@ button:disabled {
     margin-bottom: 20px;
 }
 
-.hidden {
-    display: none !important;
+.leaderboard {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard h3 {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.leaderboard ol {
+    list-style-position: inside;
+    padding: 0;
+    text-align: left;
+}
+
+.leaderboard li {
+    padding: 8px 15px;
+    margin: 5px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.leaderboard li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard li:nth-child(1) {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+    border-left: 3px solid #FFD700;
+    font-weight: bold;
+}
+
+.leaderboard li:nth-child(2) {
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.3), rgba(192, 192, 192, 0.1));
+    border-left: 3px solid #C0C0C0;
+}
+
+.leaderboard li:nth-child(3) {
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1));
+    border-left: 3px solid #CD7F32;
+}
+
+.leaderboard .score {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.leaderboard .date {
+    color: #888;
+    font-size: 0.85em;
 }
 
 #newGameBtn {
