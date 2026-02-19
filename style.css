@@ -180,6 +180,20 @@ button:disabled {
     box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
 }
 
+/* 游戏结束提示 - 默认隐藏 */
+#gameOver {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 显示游戏结束提示 */
+#gameOver.show {
+    display: flex;
+}
+
+/* 兼容旧的 hidden 类 */
 .hidden {
     display: none !important;
 }

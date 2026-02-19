@@ -95,7 +95,12 @@ function initGame() {
     generateFood();
     isPaused = false;
     isGameRunning = true;
+    
+    // 隐藏游戏结束提示
+    gameOverDiv.style.display = 'none';
     gameOverDiv.classList.add('hidden');
+    gameOverDiv.classList.remove('show');
+    
     pauseBtn.textContent = '暂停';
     pauseBtn.disabled = false;
 }
@@ -231,7 +236,11 @@ function gameOver() {
     // 保存到积分榜
     saveToLeaderboard(score);
     
+    // 显示游戏结束提示
+    gameOverDiv.style.display = 'flex';
     gameOverDiv.classList.remove('hidden');
+    gameOverDiv.classList.add('show');
+    
     pauseBtn.disabled = true;
 }
 
@@ -311,7 +320,10 @@ startBtn.addEventListener('click', startGame);
 pauseBtn.addEventListener('click', togglePause);
 restartBtn.addEventListener('click', restartGame);
 newGameBtn.addEventListener('click', () => {
+    // 确保游戏结束提示被隐藏
+    gameOverDiv.style.display = 'none';
     gameOverDiv.classList.add('hidden');
+    gameOverDiv.classList.remove('show');
     startGame();
 });
 
